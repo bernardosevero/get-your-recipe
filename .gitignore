@@ -6,8 +6,8 @@
 /.pnp
 .pnp.js
 .yarn/install-state.gz
-/.editorconfig
-/yarn.lock
+.editorconfig
+yarn.lock
 
 # testing
 /coverage
