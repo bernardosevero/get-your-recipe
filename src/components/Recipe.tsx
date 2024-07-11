@@ -36,6 +36,7 @@ export default function Recipe({ rawText }: Props): React.ReactElement {
   if (rawText === NO_ANSWER) return <SubTitle>{rawText}</SubTitle>;
 
   useEffect(() => {
+    console.log(rawText);
     const [_, title, ingredients, howToPrepare] = rawText.split('###');
     const [__, ingredientsContent] = ingredients.split('----');
     const [___, howToPrepareContent] = howToPrepare.split('----');

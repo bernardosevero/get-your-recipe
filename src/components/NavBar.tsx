@@ -55,9 +55,11 @@ export default function NavBar({}) {
     <Nav>
       <strong onClick={() => router.push('/crie-receita')}>ReceitAI</strong>
       <ul>
+        <li onClick={() => router.push('/crie-receita')}>Criar receita</li>
         <li onClick={() => router.push('/suas-receitas')}>Suas receitas</li>
+        <li onClick={() => router.push('/sobre-nos')}>Sobre nós</li>
       </ul>
-      <p onClick={() => router.push('/logout')}>Logout</p>
+      <p onClick={() => router.push('/login')}>Login</p>
     </Nav>
   );
 }

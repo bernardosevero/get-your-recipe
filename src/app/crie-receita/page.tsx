@@ -3,7 +3,7 @@
 import { Button } from '@/styled-components/Button';
 import NavBar from '@/components/NavBar';
 import Recipe from '@/components/Recipe';
-import { getRecipe } from '@/service/OpenAI';
+import { getRecipe } from '@/app/lib/OpenAI';
 import { useEffect, useRef, useState } from 'react';
 import { PageContainer, PageContent } from '@/styled-components/PageContainer';
 import { Column } from '@/styled-components/Column';
@@ -12,6 +12,7 @@ import {
   RecipeResult,
   RecipeTextArea,
 } from '@/styled-components/RecipeContents';
+import { createRecipe } from '@/service/OpenAI';
 
 export default function Home(): React.ReactElement {
   const [isListening, setIsListening] = useState(false);
@@ -72,7 +73,7 @@ export default function Home(): React.ReactElement {
   async function generateText(): Promise<void> {
     setLoading(true);
     try {
-      const text = await getRecipe(transcript);
+      const text = await createRecipe(transcript);
       setRecipe(text);
     } catch (e: unknown) {
       console.error(e as Error);
@@ -108,7 +109,9 @@ export default function Home(): React.ReactElement {
 
           <Column>
             <SubTitle>Receita escrita</SubTitle>
-            <RecipeResult>{recipe && <Recipe rawText={recipe} />}</RecipeResult>
+            <RecipeResult>
+              {recipe && !loading && <Recipe rawText={recipe} />}
+            </RecipeResult>
             <Button disabled={!recipe || loading}>Salvar</Button>
           </Column>
         </PageContent>
