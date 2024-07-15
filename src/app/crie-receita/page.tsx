@@ -3,7 +3,6 @@
 import { Button } from '@/styled-components/Button';
 import NavBar from '@/components/NavBar';
 import Recipe from '@/components/Recipe';
-import { getRecipe } from '@/app/lib/OpenAI';
 import { useEffect, useRef, useState } from 'react';
 import { PageContainer, PageContent } from '@/styled-components/PageContainer';
 import { Column } from '@/styled-components/Column';
@@ -13,10 +12,12 @@ import {
   RecipeTextArea,
 } from '@/styled-components/RecipeContents';
 import { createRecipe } from '@/service/OpenAI';
+import { saveRecipe } from '@/service/Recipe';
 
 export default function Home(): React.ReactElement {
   const [isListening, setIsListening] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [isSaved, setIsSaved] = useState(false);
   const [transcript, setTranscript] = useState('');
   const [recipe, setRecipe] = useState('');
   const recognitionRef = useRef<SpeechRecognition>();
@@ -82,6 +83,16 @@ export default function Home(): React.ReactElement {
     }
   }
 
+  function getTitle() {
+    const [_, title] = recipe.split('###');
+    return title;
+  }
+
+  async function handleSaveRecipe() {
+    setIsSaved(true);
+    await saveRecipe(getTitle(), recipe);
+  }
+
   return (
     <>
       <NavBar />
@@ -112,7 +123,12 @@ export default function Home(): React.ReactElement {
             <RecipeResult>
               {recipe && !loading && <Recipe rawText={recipe} />}
             </RecipeResult>
-            <Button disabled={!recipe || loading}>Salvar</Button>
+            <Button
+              onClick={async () => await handleSaveRecipe()}
+              disabled={!recipe || loading}
+            >
+              {!isSaved ? 'Salvar' : 'Salvo'}
+            </Button>
           </Column>
         </PageContent>
       </PageContainer>

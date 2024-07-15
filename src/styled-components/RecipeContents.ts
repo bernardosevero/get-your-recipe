@@ -14,4 +14,5 @@ export const RecipeResult = styled.div`
   border-radius: 8px;
   background-color: #f3f3f3;
   margin-bottom: 3px;
+  overflow-y: scroll;
 `

@@ -1,5 +1,4 @@
 import AuthActions from '@/modules/auth/auth-actions';
-import Link from 'next/link';
 
 export default function Home(): React.ReactElement {
   return (
@@ -14,7 +13,7 @@ export default function Home(): React.ReactElement {
       }}
     >
       <form
-        action={AuthActions.login}
+        action={AuthActions.createAccount}
         style={{
           width: '400px',
           height: '250px',
@@ -47,36 +46,21 @@ export default function Home(): React.ReactElement {
             width: '100%',
           }}
         >
-          <label htmlFor="password">Password</label>
+          <label htmlFor="password">password</label>
           <input type="password" id="password" name="password"></input>
         </div>
-        <div>
-          <button
-            type="submit"
-            style={{
-              backgroundColor: '#000',
-              color: '#fff',
-              border: '1px solid',
-              borderRadius: '12px',
-              padding: '8px 16px',
-            }}
-          >
-            Entrar
-          </button>
-          <Link href={'/sign-in'}>
-            <button
-              style={{
-                backgroundColor: '#000',
-                color: '#fff',
-                border: '1px solid',
-                borderRadius: '12px',
-                padding: '8px 16px',
-              }}
-            >
-              Cadastre-se
-            </button>
-          </Link>
-        </div>
+        <button
+          type="submit"
+          style={{
+            backgroundColor: '#000',
+            color: '#fff',
+            border: '1px solid',
+            borderRadius: '12px',
+            padding: '8px 16px',
+          }}
+        >
+          Registrar
+        </button>
       </form>
     </div>
   );

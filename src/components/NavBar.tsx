@@ -60,6 +60,7 @@ export default function NavBar({}) {
         <li onClick={() => router.push('/sobre-nos')}>Sobre nós</li>
       </ul>
       <p onClick={() => router.push('/login')}>Login</p>
+      <p onClick={() => router.push('/api/logout')}>Logout</p>
     </Nav>
   );
 }

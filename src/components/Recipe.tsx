@@ -1,3 +1,6 @@
+import RecipeService from '@/modules/recipes/recipes-service';
+import { saveRecipe } from '@/service/Recipe';
+import { Button } from '@/styled-components/Button';
 import { FormatedTextContainer } from '@/styled-components/FormatedTextContainer';
 import {
   RecipeContent,
@@ -36,7 +39,6 @@ export default function Recipe({ rawText }: Props): React.ReactElement {
   if (rawText === NO_ANSWER) return <SubTitle>{rawText}</SubTitle>;
 
   useEffect(() => {
-    console.log(rawText);
     const [_, title, ingredients, howToPrepare] = rawText.split('###');
     const [__, ingredientsContent] = ingredients.split('----');
     const [___, howToPrepareContent] = howToPrepare.split('----');
@@ -50,12 +52,14 @@ export default function Recipe({ rawText }: Props): React.ReactElement {
   }, []);
 
   return (
-    <FormatedTextContainer>
-      <RecipeTitle>{fields.title.trim()}</RecipeTitle>
-      <RecipeSubTitle>{fields.ingredientsTitle}</RecipeSubTitle>
-      <RecipeContent>{fields.ingredientsContent.trim()}</RecipeContent>
-      <RecipeSubTitle>{fields.howToPrepareTitle}</RecipeSubTitle>
-      <RecipeContent>{fields.howToPrepareContent.trim()}</RecipeContent>
-    </FormatedTextContainer>
+    <>
+      <FormatedTextContainer>
+        <RecipeTitle>{fields.title.trim()}</RecipeTitle>
+        <RecipeSubTitle>{fields.ingredientsTitle}</RecipeSubTitle>
+        <RecipeContent>{fields.ingredientsContent.trim()}</RecipeContent>
+        <RecipeSubTitle>{fields.howToPrepareTitle}</RecipeSubTitle>
+        <RecipeContent>{fields.howToPrepareContent.trim()}</RecipeContent>
+      </FormatedTextContainer>
+    </>
   );
 }

@@ -8,7 +8,7 @@ export default function Home(): React.ReactElement {
   return (
     <>
       <NavBar />
-      <PageContainer style={{ textAlign: 'center' }}>
+      <PageContainer style={{ textAlign: 'center', paddingTop: '32px' }}>
         <Title>Sobre</Title>
         <SubTitle>Bem-vindo ao ReceitAl!</SubTitle>
         <p
