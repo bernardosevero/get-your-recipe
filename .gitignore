@@ -7,7 +7,7 @@
 .pnp.js
 .yarn/install-state.gz
 .editorconfig
-yarn.lock
+package-lock.json
 
 # testing
 /coverage
@@ -29,7 +29,7 @@ yarn-debug.log*
 yarn-error.log*
 
 # local env files
-.env*.local
+.env*
 /.env.development
 
 # vercel
