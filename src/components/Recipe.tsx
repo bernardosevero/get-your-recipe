@@ -24,9 +24,9 @@ type Recipe = {
 
 const initialRecipe: Recipe = {
   howToPrepareContent: '',
-  howToPrepareTitle: 'Modo de preparo',
+  howToPrepareTitle: 'How to prepare',
   ingredientsContent: '',
-  ingredientsTitle: 'Ingredientes',
+  ingredientsTitle: 'Ingredients',
   title: '',
 };
 

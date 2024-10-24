@@ -27,7 +27,7 @@ export default function Home(): React.ReactElement {
       recognitionRef.current = new window.webkitSpeechRecognition();
       const recognition = recognitionRef.current as SpeechRecognition;
       recognition.interimResults = true;
-      recognition.lang = 'pt-BR';
+      recognition.lang = 'en';
       recognition.continuous = true;
 
       recognition.onresult = (event: SpeechRecognitionEvent) => {
@@ -99,7 +99,7 @@ export default function Home(): React.ReactElement {
       <PageContainer>
         <PageContent>
           <Column>
-            <SubTitle>Fale sua receita.</SubTitle>
+            <SubTitle>Say your recipe</SubTitle>
             <RecipeTextArea
               value={transcript}
               onChange={(evt) => onWrite(evt.target.value)}
@@ -108,18 +108,18 @@ export default function Home(): React.ReactElement {
               onClick={() => handleListening(isListening)}
               disabled={loading}
             >
-              {!isListening ? 'Comece a gravar' : 'Parar de gravar'}
+              {!isListening ? 'Start recording' : 'Stop recording'}
             </Button>
             <Button
               onClick={async () => await generateText()}
               disabled={isListening || !transcript || loading}
             >
-              {!loading ? 'Gerar receita' : 'Gerando...'}
+              {!loading ? 'Create recipe' : 'Creating...'}
             </Button>
           </Column>
 
           <Column>
-            <SubTitle>Receita escrita</SubTitle>
+            <SubTitle>Result</SubTitle>
             <RecipeResult>
               {recipe && !loading && <Recipe rawText={recipe} />}
             </RecipeResult>
@@ -127,7 +127,7 @@ export default function Home(): React.ReactElement {
               onClick={async () => await handleSaveRecipe()}
               disabled={!recipe || loading}
             >
-              {!isSaved ? 'Salvar' : 'Salvo'}
+              {!isSaved ? 'Save' : 'Saved'}
             </Button>
           </Column>
         </PageContent>

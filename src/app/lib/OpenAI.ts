@@ -2,37 +2,30 @@ import OpenAI from "openai";
 
 export async function getRecipe(text: string, key: string): Promise<string> {
     if(text.length > 2000 || !text.length) return ''
-
     const openai = new OpenAI({
       apiKey: key,
     });
 
     const response =  await openai.chat.completions.create({
-        model: "gpt-3.5-turbo",
+        model: "gpt-4o",
         messages: [
           {
             "role": "system",
-            "content": `será inserido um texto de uma receita culinária falada em linguagem natural. Você deve transformar a receita falada em uma receita estruturada clássica, padrão livro de gastronomia. Possuindo, pelo menos, modo de preparo e ingredientes.
-            O padrão de resposta será pensando numa futura separação dele em menores partes, seguindo o seguinte exemplo entre ~~~ ... ~~~:
-            O conteudo retornado deve ser no formato pedido para futuras manipulações de string
+            "content": `You will be given a text of a spoken culinary recipe in natural language. You must transform the spoken recipe into a structured, classic recipe format, as seen in a standard cookbook. The recipe should at least contain the method of preparation and ingredients. The response pattern should be designed for future separation into smaller parts, following the example below between ~~~ ... ~~~:
             ~~~
-            ### Ovo frito
-            ### Ingredientes
+            ### Fried Egg
+            ### Ingredients
             ----
-              - ovo
-              - oleo a gosto
+            - egg
+            - oil to taste
             ----
-            ### Modo de preparo
+            ### Method of preparation
             ----
-             1. quebre os ovos na frigideira
-             2. frite ate ficar bom
+            1. Break the eggs into the pan
+            2. Fry until done
             ----
             ~~~
-            Se você julgar o texto não relativo à nenhuma receita, retorne: "Receita não compreendida, favor reenviar com mais detalhes".
-            A resposta final não deve conter os "~~~" usados para delimitar o exemplo.
-            A resposta deve ser em português brasileiro.
-            Se julgares que alguma informação do modo de preparo está faltando, pode adicionar.
-            Os textos referentes a modo de preparo e ingredientes devem estar entre ---- -----
+            If you believe the text is not related to any recipe, return: "Recipe not understood, please resend with more details." The final response should not contain the "~~~" used to delimit the example. The response must be in English. If you think any information is missing in the method of preparation, feel free to add it. The texts referring to the method of preparation and ingredients must be between ---- ----
             `
           },
           {
